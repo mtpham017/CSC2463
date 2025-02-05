@@ -36,7 +36,7 @@ function draw() {
   if (mouseIsPressed) {
     if (mouseX > startX + squareSize + spacing) {
       stroke(selectedColor);
-      strokeWeight(10);
+      strokeWeight(12);
       line(prevX, prevY, mouseX, mouseY);
     }
   }

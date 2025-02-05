@@ -1,3 +1,4 @@
+//setup for palette
 let colors = [];
 let selectedColor;
 let startX = 10;

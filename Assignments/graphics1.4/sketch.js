@@ -4,7 +4,6 @@ let GameStates = Object.freeze({
   END: "end"
 });
 
-
 let gameState = GameStates.START;
 let score = 0;
 let highScore = 0;
@@ -13,18 +12,24 @@ let textPadding = 15;
 let gameFont;
 let aliens = [];
 let alienSprites, squishSprites;
-//number of aliens on screen
 let numAliens = 5;
-//Dimensions of the spirtes in px
 let spriteSize = 48;
 let frameIndex = 0;
 let frameDelay = 10;
 let frameCounter = 0;
 
+// Tone.js variables
+let startMusic, gameBgMusic, gameOverMusic, squishSound;
+let startMusicStarted = false;
+
 function preload() {
   gameFont = loadFont("media/PressStart2P-Regular.ttf");
   alienSprites = loadImage("sprites.png");
   squishSprites = loadImage("spritesSquished.png");
+  startMusic = new Tone.Player("media/startMusic.mp3").toDestination();
+  gameBgMusic = new Tone.Player("media/gameBg.mp3").toDestination();
+  gameOverMusic = new Tone.Player("media/gameoverMusic.mp3").toDestination();
+  squishSound = new Tone.Player("media/squishedSound.mp3").toDestination();
 }
 
 function setup() {
@@ -32,6 +37,7 @@ function setup() {
   for (let i = 0; i < numAliens; i++) {
     aliens.push(new Alien(random(width), random(height)));
   }
+  gameBgMusic.loop = true;
 }
 
 function draw() {
@@ -54,28 +60,17 @@ function drawStartScreen() {
   textSize(17);
   textFont(gameFont);
   text("Press ENTER to Start", width / 2, height / 2);
-}
 
-function playGame() {
-  textAlign(LEFT, TOP);
-  text("Score: " + score, textPadding, textPadding);
-  textAlign(RIGHT, TOP);
-  text("Time: " + Math.ceil(time), width - textPadding, textPadding);
-  
-  frameCounter++;
-  if (frameCounter >= frameDelay) {
-    frameIndex = (frameIndex + 1) % 2;
-    frameCounter = 0;
+  if (startMusic.loaded && !startMusicStarted) {
+    startMusic.start();
+    startMusicStarted = true;
   }
-  
-  for (let alien of aliens) {
-    alien.update();
-    alien.display();
+
+  if (gameBgMusic.state === "started") {
+    gameBgMusic.stop();
   }
-  
-  time -= deltaTime / 1000;
-  if (time <= 0) {
-    gameState = GameStates.END;
+  if (gameOverMusic.state === "started") {
+    gameOverMusic.stop();
   }
 }
 

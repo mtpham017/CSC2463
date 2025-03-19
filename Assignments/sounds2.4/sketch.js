@@ -1,3 +1,6 @@
+//added music for the play and end states and bone crack sound for squishing the alien sprites.
+//added music for start state but once i tested github pages it stopped working and could not figure out a solution. 
+
 let GameStates = Object.freeze({
   START: "start",
   PLAY: "play",

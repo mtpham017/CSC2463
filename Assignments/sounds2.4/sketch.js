@@ -20,7 +20,7 @@ let frameCounter = 0;
 
 // Tone.js variables
 let startMusic, gameBgMusic, gameOverMusic, squishSound;
-let startMusicStarted = false; 
+let startMusicStarted = false;
 
 function preload() {
   gameFont = loadFont("media/PressStart2P-Regular.ttf");
@@ -60,17 +60,16 @@ function drawStartScreen() {
   textSize(17);
   textFont(gameFont);
   text("Press ENTER to Start", width / 2, height / 2);
-  if (!startMusic.loaded) return;
-  // checks if the music has already started
-  if (!startMusicStarted) { 
+
+  if (startMusic.loaded && !startMusicStarted) {
     startMusic.start();
     startMusicStarted = true;
   }
 
-  if(gameBgMusic.state === "started"){
+  if (gameBgMusic.state === "started") {
     gameBgMusic.stop();
   }
-  if(gameOverMusic.state === "started"){
+  if (gameOverMusic.state === "started") {
     gameOverMusic.stop();
   }
 }

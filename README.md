@@ -2,7 +2,7 @@
 
 ## Project Description 
 
-This is a painting app made with **p5.js** and an **Arduino** that acts like a **macro pad** for enhanced painting controls. The Arduino lets users quickly cycle through brush colors using a button and adjust brush size with a knob — providing a hands-on interface for digital art.
+This is a painting app made with **p5.js** and an **Arduino** that acts like a **macro pad** for enhanced painting controls. The Arduino lets users quickly cycle through brush colors using a button and adjust brush size with a knob, providing a hands-on interface for digital art.
 
 ---
 
